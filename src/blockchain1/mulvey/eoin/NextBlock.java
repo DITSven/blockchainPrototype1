@@ -11,7 +11,7 @@ public class NextBlock {
         blockCommand.add("command3");
         
         int index = blockchain.size();
-        this.nextBlock = new Block(blockchain.get(index - 1).getIndex(), blockchain.get(index - 1).getBlockHash(), blockCommand);
+        this.nextBlock = new Block(blockchain.get(index - 1), blockCommand);
 	}
 	
 	public Block getNextBlock() {

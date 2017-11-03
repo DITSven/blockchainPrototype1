@@ -16,9 +16,9 @@ public class Main {
         }
         
         for (int j = 0; j < 20; j ++) {
+        	System.out.println("Commands: " + blockchain.get(j).getHashCommands());
         	System.out.println("Hash of block " + j + ":");
-        	System.out.println("Previous hash: " + blockchain.get(j).getPreviousHash());
-        	System.out.println(blockchain.get(j).getIndex() + blockchain.get(j).getBlockHash());
+        	System.out.println(blockchain.get(j).getBlockHash());
         }
             }
     
