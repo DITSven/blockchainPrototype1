@@ -14,7 +14,7 @@ public class CalculateCommandsHash {
         for (int i = 0; i < commands.size(); i++ ) {
         	String sha256Temp = org.apache.commons.codec.digest.DigestUtils.sha256Hex(commands.get(i));
         	hashCommands.add(sha256Temp);
-        	hashCommandsString.concat(sha256Temp);
+        	hashCommandsString = hashCommandsString + sha256Temp;
         }
 	}
 	
