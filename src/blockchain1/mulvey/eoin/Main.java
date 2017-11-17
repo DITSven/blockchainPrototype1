@@ -6,7 +6,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-         
+        
+    	/*
         ArrayList<Block> blockchain = new InitialiseBlockchain(new GenesisBlock().getGenesisBlock()).getBlockchain();
         
         for (int i = 0; i < 20; i++) {
@@ -19,6 +20,10 @@ public class Main {
         	System.out.println("Hash of block " + j + ":");
         	System.out.println(blockchain.get(j).getBlockHash());
         }
-            }
+        
+        */
+    	DevGUI dg = new DevGUI();
+    	ClientGUI cg = new ClientGUI();
+    }
     
 }

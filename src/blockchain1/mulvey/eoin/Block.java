@@ -1,8 +1,9 @@
 package blockchain1.mulvey.eoin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Block {
+public class Block implements Serializable{
 
 	private int index;
     private ArrayList<String> hashCommands;
