@@ -2,6 +2,8 @@ package blockchain1.mulvey.eoin;
 
 import java.util.ArrayList;
 
+import blockchain.mulvey.eoin.Block;
+
 public class GenesisBlock {
 	private Block genesisBlock;
 	public GenesisBlock(){

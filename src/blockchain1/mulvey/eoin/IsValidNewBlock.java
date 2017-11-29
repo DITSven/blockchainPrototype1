@@ -1,5 +1,8 @@
 package blockchain1.mulvey.eoin;
 
+import blockchain.mulvey.eoin.Block;
+import blockchain.mulvey.eoin.CalculateBlockHash;
+
 public class IsValidNewBlock {
 	private boolean isValid;
 	private String result;

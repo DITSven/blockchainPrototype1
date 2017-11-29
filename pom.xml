@@ -22,5 +22,12 @@
       <artifactId>commons-codec</artifactId>
       <version>1.10</version>
     </dependency>
+    <dependency>
+      <groupId>blockchain.mulvey.eoin</groupId>
+      <artifactId>BlockPrototype</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>D:\College\Project\BlockPrototype\blockprototype.jar</systemPath>
+    </dependency>
   </dependencies>
 </project>

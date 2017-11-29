@@ -1,7 +1,5 @@
 package blockchain1.mulvey.eoin;
 
-import java.util.ArrayList;
-
 public class Main {
 
 
@@ -22,8 +20,9 @@ public class Main {
         }
         
         */
-    	DevGUI dg = new DevGUI();
-    	ClientGUI cg = new ClientGUI();
+    	new DevGUI();
+    	
+
     }
     
 }

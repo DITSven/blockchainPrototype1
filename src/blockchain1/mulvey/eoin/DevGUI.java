@@ -13,6 +13,8 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import blockchain.mulvey.eoin.Block;
+
 public class DevGUI implements ActionListener{
 
 	JFrame frame;
@@ -29,7 +31,7 @@ public class DevGUI implements ActionListener{
 	
 	public DevGUI() {
 		frame = new JFrame("ChainDev v0.1");
-		frame.setSize(800,640);
+		frame.setSize(300,150);
 		white = new Color(255,255,255);
 		fileChoice = new JFileChooser();
 		whichPanel = 0;
@@ -60,7 +62,7 @@ public class DevGUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		
+		/*
 		if (source == cancelButton) {
 			if (whichPanel == 1){
 				frame.remove(updatePanel1);
@@ -75,33 +77,38 @@ public class DevGUI implements ActionListener{
 			frame.add(basePanel);
 			frame.validate();
 		}
-		
+		*/
 		if (source == createButton) {
-			ArrayList<Block> blockchain = new InitialiseBlockchain(new GenesisBlock().getGenesisBlock()).getBlockchain();
-	        
-	        for (int i = 0; i < chainSize; i++) {
-	        	blockchain.add(new NextBlock(blockchain).getNextBlock());
-	        }
-			int fileChoiceOption = fileChoice.showSaveDialog(frame);
-			if(fileChoiceOption == JFileChooser.APPROVE_OPTION){
-				File file = fileChoice.getSelectedFile();
-				try(FileOutputStream fileOutput = new FileOutputStream(file)){
-					ObjectOutputStream objectFileOutput = new ObjectOutputStream(fileOutput);
+			if(chainSize > 0) {
+				ArrayList<Block> blockchain = new InitialiseBlockchain(new GenesisBlock().getGenesisBlock()).getBlockchain();
+		        
+		        for (int i = 0; i < chainSize; i++) {
+		        	blockchain.add(new NextBlock(blockchain).getNextBlock());
+		        }
+				int fileChoiceOption = fileChoice.showSaveDialog(frame);
+				if(fileChoiceOption == JFileChooser.APPROVE_OPTION){
+					File file = fileChoice.getSelectedFile();
+					try(FileOutputStream fileOutput = new FileOutputStream(file)){
+						ObjectOutputStream objectFileOutput = new ObjectOutputStream(fileOutput);
+						
+						objectFileOutput.writeObject(blockchain);
+						objectFileOutput.close();
+						fileOutput.close();
+						
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+				}//end if
+				else {
 					
-					objectFileOutput.writeObject(blockchain);
-					objectFileOutput.close();
-					fileOutput.close();
-					
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-			}//end if
+			}
 			else {
-				
+				JOptionPane.showMessageDialog(null, "Chain size must be greater than 0");
 			}
 		}
 		
@@ -162,10 +169,8 @@ public class DevGUI implements ActionListener{
 		panel.add(new JLabel("Size of Chain"));
 		panel.add(chainSizeTextField);
 		//panel.add(browseButton);
-		if(chainSize > 0) {
-			panel.add(createButton);
-		}
-		panel.add(cancelButton);
+		//panel.add(cancelButton);
+		panel.add(createButton);
 		
 		commandNumberTextField.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -209,7 +214,6 @@ public class DevGUI implements ActionListener{
             public void insertUpdate(DocumentEvent de) {
                 try{
                 	chainSize = Integer.parseInt(chainSizeTextField.getText());
-                	updatePanel();
                 }
                 catch(Exception e) {
                 	JOptionPane.showMessageDialog(null, "Must enter a number.");
@@ -220,7 +224,6 @@ public class DevGUI implements ActionListener{
             public void removeUpdate(DocumentEvent de) {
             	try{
             		chainSize = Integer.parseInt(chainSizeTextField.getText());
-            		updatePanel();
             		}
                 catch(Exception e) {
                 	
@@ -231,7 +234,6 @@ public class DevGUI implements ActionListener{
             public void changedUpdate(DocumentEvent de) {
             	try{
             		chainSize = Integer.parseInt(chainSizeTextField.getText());
-            		updatePanel();
                 }
                 catch(Exception e) {
                 	JOptionPane.showMessageDialog(null, "Must enter a number.");
@@ -239,7 +241,7 @@ public class DevGUI implements ActionListener{
             }
         });
 		
-		cancelButton.addActionListener(this);
+		//cancelButton.addActionListener(this);
 		createButton.addActionListener(this);
 		
 		return panel;
